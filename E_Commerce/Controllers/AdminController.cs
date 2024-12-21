@@ -149,17 +149,22 @@ namespace E_Commerce.Controllers
             return NotFound();
         }
 
-        // search Category
+        public IActionResult NotFound()
+        {
+            return View();
+        }
+
+        // search product
         public IActionResult Search(string name)
         {
-            var product = CategoryRepository.GetOne(e => e.Name.Contains(name));
-            if (product != null)
+            var product = productRepository.Get(e => e.Name.Contains(name));
+            if (product != null && product.Any())
             {
                 return View(product);
             }
             else
             {
-                return NotFound();
+                return RedirectToAction("NotFound");
             }
         }
 

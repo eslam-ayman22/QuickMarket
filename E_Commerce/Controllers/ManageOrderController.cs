@@ -115,6 +115,8 @@ namespace E_Commerce.Controllers
 
                 emailService.SendOrderConfirmationEmail(toEmail, subject, body);
                 TempData["confirm"] = "Order confirmed and email sent successfully.";
+                order.IsConfirm = true;
+                orderRepository.commit();
                 TempData["orderId"] = order.OrderId;
                 return RedirectToAction("GetAll");
             }

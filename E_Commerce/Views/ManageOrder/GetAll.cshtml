@@ -58,12 +58,24 @@
                 </table>
             </div>
             <div class="card-footer d-flex justify-content-between">
-                <a href="/ManageOrder/Confirm/@order.OrderId" class="btn btn-success rounded-pill px-4">
-                    <i class="bi bi-check-circle"></i> Confirm
-                </a>
-                <a href="/ManageOrder/CancelOrder/@order.OrderId" class="btn btn-danger rounded-pill px-4">
-                    <i class="bi bi-x-circle"></i> Cancel
-                </a>
+                @if (order.IsConfirm)
+                {
+                    <button class="btn btn-secondary rounded-pill px-4" disabled>
+                        <i class="bi bi-check-circle-fill"></i> Confirmed
+                    </button>
+                }
+                else
+                {
+                        <a href="/ManageOrder/Confirm/@order.OrderId" class="btn btn-success rounded-pill px-4">
+                            <i class="bi bi-check-circle"></i> Confirm
+                        </a>
+
+                        <a href="/ManageOrder/CancelOrder/@order.OrderId" class="btn btn-danger rounded-pill px-4">
+                             <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                 }
+                
+               
             </div>
         </div>
     }
