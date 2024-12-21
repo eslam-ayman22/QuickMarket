@@ -1,0 +1,70 @@
+﻿@model Product
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Product Image Section -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <img src="~/images/@Model.Img" class="img-fluid rounded" alt="@Model.Name">
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="col-md-6">
+            <h1 class="display-5 fw-bold text-primary mb-3">@Model.Name</h1>
+            <h3 class="text-success mb-4">Price: @Model.Price EGP</h3>
+
+            <p class="lead text-muted mb-4">Description:<br> @Model.Description</p>
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-3">
+                <button class="btn btn-lg btn-primary px-4">Buy Now</button>
+                <a asp-action="Index" asp-controller="Cart" asp-route-id="@Model.ProductId" class="btn btn-lg btn-outline-primary px-4">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Styling for Modern Look -->
+<style>
+    .container {
+        max-width: 1200px;
+    }
+
+    .display-5 {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .card img {
+        border-radius: 10px;
+    }
+
+    h1, h3, .lead {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-outline-primary {
+        border-color: #007bff;
+        color: #007bff;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+    .card img {
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+        margin-left:10px;
+    }
+
+        .card img:hover {
+            transform: scale(1.1); /* Increase the scale when hovered */
+        }
+</style>

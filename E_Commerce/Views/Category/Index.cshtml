@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Category>
+
+@if (TempData["stats"] != null)
+{
+    <div id="tempDataMessage" class="alert alert-success">
+        @TempData["stats"]
+    </div>
+}
+
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">All Categories</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover shadow-sm">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>Category Id</th>
+                    <th>Category Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CategoryId</td>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <a href="/Product/Index/@item.CategoryId" class="btn btn-primary">Go To All</a>
+                           
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

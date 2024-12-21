@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Order>
+
+@{
+    Layout = "_dashboardLayout";
+}
+
+@if (TempData["confirm"] != null)
+{
+    <div id="tempDataMessage" class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i> @TempData["confirm"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["canceled"] != null)
+{
+    <div id="tempDataMessage" class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+        <i class="bi bi-exclamation-circle-fill me-2"></i> @TempData["canceled"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4 display-6 fw-bold text-primary">Orders Overview</h1>
+    @foreach (var order in Model)
+    {
+        <div class="card shadow-lg mb-5 border-0">
+            <div class="card-header bg-primary text-white rounded-top">
+                <h3 class="card-title text-center">Order #@order.OrderId</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Order Date:</strong> @order.orderDate?.ToString("MM/dd/yyyy")</p>
+                <p><strong>Total Price:</strong> @order.OrderItems.Sum(item => item.cost * item.count) EGP</p>
+                <p><strong>Customer Email:</strong> @order.ApplicationUser?.Email</p>
+
+                <h5 class="mt-4 fw-bold">Order Items</h5>
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="bg-secondary text-white">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Cost</th>
+                            <th>Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in order.OrderItems)
+                        {
+                            <tr>
+                                <td>@item.Product.Name</td>
+                                <td>@item.count</td>
+                                <td>@item.cost EGP</td>
+                                <td>@(item.cost * item.count) EGP</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="/ManageOrder/Confirm/@order.OrderId" class="btn btn-success rounded-pill px-4">
+                    <i class="bi bi-check-circle"></i> Confirm
+                </a>
+                <a href="/ManageOrder/CancelOrder/@order.OrderId" class="btn btn-danger rounded-pill px-4">
+                    <i class="bi bi-x-circle"></i> Cancel
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Styling -->
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        color: #007bff;
+        margin-bottom: 40px;
+    }
+
+    .card {
+        border-radius: 15px;
+        background-color: #f8f9fa;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-header {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-success, .btn-danger {
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 50px;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        .table thead {
+            background-color: #6c757d;
+            color: white;
+        }
+</style>

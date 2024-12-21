@@ -1,0 +1,276 @@
+﻿@model List<Category>
+
+<!-- Hero Section -->
+<div class="hero-section position-relative text-center text-white" style="background-image: url('/images/banner.jpg'); background-size: cover; background-position: center; height: 90vh;">
+    <div class="overlay position-absolute w-100 h-100" style="background-color: rgba(0, 0, 0, 0.6);"></div>
+    <div class="content position-relative d-flex flex-column align-items-center justify-content-center h-100 text-light">
+        <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Explore the Latest Technology</h1>
+        <p class="lead mb-4 animate__animated animate__fadeInUp">Top-quality products at unbeatable prices</p>
+
+        <!-- Search Bar with Button -->
+        <form action="/Home/Search">
+            <div class="search-container mb-4 animate__animated animate__fadeInUp">
+                <input type="text" name="name" class="search-input" placeholder="Search products..." aria-label="Search">
+                <button  class="btn btn-search" >Search</button>
+            </div>
+        </form>
+
+        <a href="/Product/AllProduct" class="btn btn-lg btn-custom px-5 py-3 animate__animated animate__pulse animate__infinite">Shop Now</a>
+    </div>
+</div>
+
+
+<!-- Product Categories Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Product Categories</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <a href="/Home/CategoryPerProduct/@item.CategoryId" class="card text-decoration-none text-dark shadow-sm h-100">
+                    <div class="card-img-wrapper position-relative">
+                        <img src="~/images/@item.Img" class="card-img-top" alt="@item.Name">
+                        <div class="card-overlay position-absolute w-100 h-100"></div>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">@item.Name</h5>
+                        <p class="card-text">High-performance @item.Name for work and gaming</p>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+<!-- Footer Section -->
+<footer class="footer bg-dark text-light py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-4 mb-3">
+                <h5>About Us</h5>
+                <p>We provide the latest technology products at unbeatable prices. Explore our wide range of categories and shop now!</p>
+            </div>
+            <!-- Links Section -->
+            <div class="col-md-4 mb-3">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/Home/Index" class="text-light text-decoration-none">Home</a></li>
+                    <li><a href="/Product/AllProduct" class="text-light text-decoration-none">Products</a></li>
+                    <li><a href="" class="text-light text-decoration-none">About Us</a></li>
+                    <li><a href="" class="text-light text-decoration-none">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Contact Section -->
+            <div class="col-md-4 mb-3">
+                <h5>Contact Us</h5>
+                <p><i class="bi bi-envelope"></i> engeslamayman8@gmail.com</p>
+                <p><i class="bi bi-phone"></i> +20 1149043904</p>
+                <p><i class="bi bi-geo-alt"></i> 123 Sohag Akmim</p>
+            </div>
+        </div>
+        <hr class="bg-light">
+        <div class="text-center">
+            <p class="mb-0">&copy; 2024 QuickMart. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+<!-- Additional Styling for Enhanced Card Appearance -->
+<style>
+    .card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        border: none;
+        overflow: hidden;
+        border-radius: 20px;
+        position: relative;
+        background: linear-gradient(to bottom right, #f7f7f7, #eaeaea);
+        height: 100%; /* Full height for consistency */
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+    .card-img-wrapper {
+        overflow: hidden;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        height: 300px; /* Adjust card image height */
+    }
+
+    .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the image fills the area and is fully visible */
+        transition: transform 0.5s ease;
+    }
+
+    /* Image Zoom on Hover */
+    .card:hover img {
+        transform: scale(1.1);
+    }
+
+    /* Overlay Effect */
+    .card-overlay {
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .card:hover .card-overlay {
+        opacity: 1;
+    }
+
+    /* Text Styling */
+    .card-title, .card-text {
+        transition: color 0.3s ease;
+    }
+
+    .card:hover .card-title {
+        color: #007bff;
+    }
+
+    .card:hover .card-text {
+        color: #555;
+    }
+
+    
+    .footer {
+        background-color: #2c3e50; /* Dark gray background */
+        color: white;
+        position:relative;
+        top:110px;
+        
+    }
+
+    .footer a {
+        color: red; /* Highlight color for links */
+        transition: color 0.3s ease;
+       
+    }
+
+        .footer a:hover {
+            color: #cc0000; /* Darker red on hover */
+        }
+
+    .footer h5 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .footer p {
+        font-size: 14px;
+    }
+
+    .footer .bi {
+        margin-right: 8px; /* Space before icons */
+    }
+    /* Styling for the search bar and button */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.8); /* Slight background */
+        border-radius: 30px;
+        padding: 5px 20px;
+    }
+
+    .search-input {
+        width: 300px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 20px;
+        outline: none;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+    }
+
+        .search-input:focus {
+            border-color: #ff4d4d; /* Highlight color on focus */
+        }
+
+    .btn-search {
+        background-color: #ff4d4d;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 16px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        .btn-search:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+
+
+    
+</style>
+
+@section Scripts{
+
+<style>
+    .hero-section {
+        background-image: url('/images/banner.jpg'); /* Place your high-quality banner image */
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.5s ease;
+            /* يجعل العنصر يغطي عرض النافذة بالكامل */
+            height: 90vh;
+            width:100vw
+           
+    }
+
+  
+
+
+    .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.6); /* طبقة شبه شفافة */
+            width: 100%;
+            height: 100%;
+    }
+
+    .hero-section h1, .hero-section p {
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Soft text shadow for readability */
+    }
+
+    .btn-custom {
+        background-color: #ff4d4d;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            background-color: #cc0000;
+           /*  transform: scale(0.5); */ /* Slight enlarge effect on hover */
+            color: white;
+        }
+
+        .content {
+            z-index: 1; /* يجعل النص فوق الصورة والطبقة */
+        }
+</style>
+}
+
+<!-- Link to Animate.css for Animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+

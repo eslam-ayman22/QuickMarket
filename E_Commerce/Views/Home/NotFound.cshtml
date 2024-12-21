@@ -1,0 +1,59 @@
+﻿<div class="container text-center d-flex flex-column align-items-center justify-content-center vh-100">
+    <!-- Error Image -->
+    <img src="~/images/company-404.png" width="140px" height="140px" alt="404 Not Found" style="max-width: 60%; height: auto;" class="mb-4">
+
+    <!-- Error Message -->
+    <h1 class="display-3 fw-bold text-danger mb-3">404 - Product Not Found</h1>
+    <p class="lead text-muted mb-4">Oops! The Product you're looking for doesn't exist or has been moved.</p>
+
+    <!-- Action Buttons -->
+    <div class="d-flex gap-3 justify-content-center">
+        <a href="/Home/Index" class="btn btn-primary px-4 py-2">Go to Homepage</a>
+        
+    </div>
+</div>
+
+<!-- Styling -->
+<style>
+    .container {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+        color: #ff4d4d;
+    }
+
+    a.btn {
+        border-radius: 30px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+    .btn-outline-secondary {
+        border: 2px solid #6c757d;
+        color: #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+    img {
+        animation: bounce 2s infinite;
+    }
+
+    
+     
+</style>

@@ -1,0 +1,31 @@
+﻿@model Category
+@{
+    Layout = "_dashboardLayout";
+}
+
+<div class="container mt-5">
+    <h2 class="text-primary mb-4">Edit Category</h2>
+
+    <form asp-controller="Category" asp-action="Edit" method="post">
+        <input type="hidden" asp-for="CategoryId" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

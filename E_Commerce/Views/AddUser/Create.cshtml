@@ -1,0 +1,109 @@
+﻿﻿
+
+
+@model UserModel
+
+@{
+    Layout = "_dashboardLayout";
+}
+
+
+@if (TempData["Add"] != null)
+{
+    <div id="tempDataMessage" class="alert alert-success">
+        @TempData["Add"]
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-danger text-white">
+            <h3 class="text-center">Add New User</h3>
+        </div>
+        <div class="card-body">
+            <form  asp-controller="AddUser" asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <!-- Adress  -->
+                <div class="mb-3">
+                    <label asp-for="Adress" class="form-label"></label>
+                    <input asp-for="Adress" class="form-control" />
+                    <span asp-validation-for="Adress" class="text-danger"></span>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <!-- Role Dropdown List -->
+                <div class="form-group">
+                    <label asp-for="Role">Select Type</label>
+                    <select asp-for="Role" class="form-control">
+                        <option value="">-- Select a Type --</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Patient">Customer</option>
+                        <option value="Patient">Employee</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+                <br>
+                <div class="d-grid gap-2">
+                    <input type="submit" value="Add User" class="btn btn-custom btn-block">
+                </div>
+
+               
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+<style>
+    .btn-custom {
+        background-color: #2c3e50;
+        color: black;
+        border-radius: 25px;
+    }
+
+    .btn-custom:hover {
+            background-color: #5c3e50;
+            color: white;
+    }
+
+    .card-header{
+        background-color: #2c3e50 !important;
+    }
+    
+
+</style>

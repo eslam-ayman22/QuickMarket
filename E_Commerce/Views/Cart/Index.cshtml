@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ShoppingCart>
+
+<form asp-action="Pay" asp-controller="Cart" method="post" class="container mt-5">
+    <div class="card shadow border-0">
+        <!-- Header -->
+        <div class="card-header bg-primary bg-gradient text-white py-4">
+            <div class="row align-items-center px-4">
+                <div class="col-6">
+                    <h5 class="fw-bold text-uppercase mb-0">Shopping Cart</h5>
+                </div>
+                <div class="col-6 text-end">
+                    <a href="/Product/AllProduct" class="btn btn-light btn-sm text-uppercase">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <!-- Cart Items -->
+            <div class="card-body my-4">
+                <!-- Cart Item -->
+            <div class="row border-bottom mb-4 pb-3">
+                <!-- Image -->
+                <div class="col-12 col-md-2 text-center">
+                    <img src="~/images/@item.product.Img" alt="Product Image" class="img-fluid rounded shadow-sm" />
+                </div>
+                <!-- Product Info -->
+                <div class="col-12 col-md-5">
+                    <h5 class="text-uppercase fw-bold text-dark">@item.product.Name</h5>
+                    <p class="text-muted small mb-2">@item.product.Description</p>
+                    <h6 class="text-muted">Price: @item.product.Price EGP</h6>
+                </div>
+                <!-- Quantity Controls -->
+                <div class="col-12 col-md-3 text-center">
+                    <div class="btn-group" role="group">
+                            <a asp-action="Decreament" asp-controller="Cart" asp-route-cartid="@item.Id" class="btn btn-outline-primary">
+                            <i class="bi bi-dash-square"></i>
+                           </a>
+                        
+                            <a asp-action="Increament" asp-controller="Cart" asp-route-cartid="@item.Id" type="button" class="btn btn-outline-primary">
+                            <i class="bi bi-plus-square"></i>
+                           </a>
+                            <span class="text-muted">&nbsp;x&nbsp;</span>@item.count
+                    </div>
+                </div> 
+                <!-- Remove Button -->
+                <div class="col-12 col-md-2 text-end">
+                        <a asp-controller="Cart" asp-action="Remove" asp-route-cartid="@item.Id" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Repeat Cart Items -->
+            <!-- Add another row here for additional cart items -->
+        </div>
+        }
+
+        <!-- Footer -->
+        <div class="card-footer bg-light">
+            <div class="row">
+                <!-- Total -->
+                <div class="col-12 col-md-6 offset-md-3">
+                    <div class="d-flex justify-content-between align-items-center border p-3 rounded bg-white shadow-sm">
+                        <h5 class="mb-0 fw-bold text-uppercase">Total (EGP):</h5>
+                        <h4 class="mb-0 text-primary fw-bold">@Model.Sum(item => item.product.Price * item.count)</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4 offset-md-4">
+                    <button class="btn btn-primary w-100 text-uppercase fw-bold py-2">Proceed to Checkout</button>>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
